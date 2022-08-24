@@ -20,22 +20,22 @@ import javafx.stage.Stage;
  * @author Vojta
  */
 public class Strategie extends Application {
-    static AnchorPane root;
+    static AnchorPane anchorPane;
     static List<GridPane> gridPanes = new ArrayList<GridPane>();
     private static int current = 0;
 
     
     @Override
     public void start(Stage stage) throws Exception {
-        root = (AnchorPane) FXMLLoader.load(getClass().getResource("Anchor.fxml"));
+        anchorPane = (AnchorPane) FXMLLoader.load(getClass().getResource("Anchor.fxml"));
         gridPanes.add((GridPane) FXMLLoader.load(getClass().getResource("MainMenu.fxml"))); // 0 , hlavni menu
         gridPanes.add((GridPane) FXMLLoader.load(getClass().getResource("Help.fxml"))); // 1, nápověda
         gridPanes.add((GridPane) FXMLLoader.load(getClass().getResource("GameGrid.fxml"))); // 2, hra
         
         
-        root.getChildren().add(gridPanes.get(0));
+        anchorPane.getChildren().add(gridPanes.get(0));
         
-        Scene scene = new Scene(root, 1920, 1080);
+        Scene scene = new Scene(anchorPane, 1920, 1080);
         stage.setFullScreen(true);
         stage.setResizable(false);
         stage.setTitle("HolyWars");
@@ -45,8 +45,8 @@ public class Strategie extends Application {
     }
     
     public static void setCurrentPane(int newPane){
-        root.getChildren().remove(gridPanes.get(current));
-        root.getChildren().add(gridPanes.get(newPane));
+        anchorPane.getChildren().remove(gridPanes.get(current));
+        anchorPane.getChildren().add(gridPanes.get(newPane));
         current = newPane;
     }
 

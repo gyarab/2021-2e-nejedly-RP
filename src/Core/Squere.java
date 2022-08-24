@@ -17,8 +17,6 @@ public class Squere {
     private int xPos;
     private int yPos;
 
-    private Field f;
-
     public Squere(int xPos, int yPos, Figure currentFigure) {
         this.xPos = xPos;
         this.yPos = yPos;

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.text.*?>
 <?import javafx.scene.image.*?>
 <?import java.lang.*?>
 <?import java.util.*?>
@@ -28,6 +29,9 @@
             </ImageView>
          </graphic>
       </Button>
-      <TextArea editable="false" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+      <TextArea editable="false" prefHeight="200.0" prefWidth="200.0" text="Napoveda bude pridana pozdeji. " GridPane.columnIndex="1" GridPane.rowIndex="1">
+         <font>
+            <Font size="22.0" />
+         </font></TextArea>
    </children>
 </GridPane>

@@ -25,6 +25,16 @@ public class Field{
         }
     }
 
+    public void deleteFig(int xPos, int yPos){
+        field[xPos][yPos].setCurrentFigure(null);
+    }
+
+    /**
+     *
+     * @param xPos minimalni hodnota 0, maximalni hodnota 11
+     * @param yPos minimalni hodnota 0, maximalni hodnota 9
+     * @param f postava kterou chceme priradit do pole
+     */
     public void assignPos(int xPos, int yPos, Figure f)
     {
         if (xPos < 0 || xPos >= WIDTH)

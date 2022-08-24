@@ -11,28 +11,20 @@ import Figures.Archer;
 import Figures.Figure;
 import Figures.Knight;
 
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
+
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ProgressBar;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.effect.ColorAdjust;
-import javafx.scene.effect.Effect;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
-import javafx.scene.paint.Paint;
 import javafx.scene.text.Font;
-import java.beans.XMLEncoder;
-import java.beans.XMLDecoder;
 
 /**
  * FXML Controller class
@@ -62,12 +54,17 @@ public class GameGridController implements Initializable {
     private ImageView[][] images;
     private Label[][] texts;
 
+    private boolean editable = false;
+
     private ProgressBar[][] progress;
     /**
      * Initializes the controller class.
      */
     @FXML
     private Button backButton;
+
+    @FXML
+    private CheckBox editCheckBox;
     
     @FXML
     private GridPane GameGrid;
@@ -79,11 +76,31 @@ public class GameGridController implements Initializable {
     private ImageView backgroundImageView;
 
     @FXML
+    void checkEditable(ActionEvent event) {
+        editable = editCheckBox.isSelected();
+    }
+
+    @FXML
     void mousePressed(MouseEvent event) {
         if (event.getY() <= 30)
             return;
 
-        if (moving) {
+        if (editable){
+            double curX = (event.getX()/1920)*12;
+            double curY = ((event.getY()-30)/1050)*10;
+            int targetX = (int) curX;
+            int targetY = (int) curY;
+            if (f.getFigure(targetX,targetY) == null){
+                f.assignPos(targetX,targetY,new Knight(turnColor,20));
+                updateMap();
+            } else if(f.getFigure(targetX,targetY).getClass() == Knight.class){
+                f.deleteFig(targetX,targetY);
+                f.assignPos(targetX,targetY,new Archer(turnColor,20));
+                updateMap();
+            }else if(f.getFigure(targetX,targetY).getClass() == Archer.class)
+                f.deleteFig(targetX,targetY);
+            updateMap();
+        } else if (moving) {
             double curX = (event.getX()/1920)*12;
             double curY = ((event.getY()-30)/1050)*10;
             int targetX = (int) curX;
@@ -203,12 +220,12 @@ public class GameGridController implements Initializable {
             turnLabel.setText("Hraje Modry");
         }
         if (red == 0) {
-            turnLabel.setText("Blue Wins!");
+            turnLabel.setText("Modry Vyhral!");
             turnLabel.setTextFill(Color.GOLD);
             turnColor = true;
         }
         if (blue == 0) {
-            turnLabel.setText("Red Wins!");
+            turnLabel.setText("Cerveny Vyhral!");
             turnLabel.setTextFill(Color.GOLD);
             turnColor = false;
         }
@@ -216,24 +233,24 @@ public class GameGridController implements Initializable {
 
     private void initializeArmy() {
         //Blue
-        f.assignPos(0, 0, new Knight(false, 100));
+        f.assignPos(0, 0, new Knight(false, 20));
         f.assignPos(0, 2, new Knight(false, 10));
         f.assignPos(0, 4, new Knight(false, 10));
-        f.assignPos(0, 6, new Knight(false, 1));
-        f.assignPos(0, 8, new Knight(false, 1));
-        f.assignPos(1, 4, new Knight(false, 1));
-        f.assignPos(1, 5, new Knight(false, 1));
-        f.assignPos(0,1,new Archer(false,5));
+        f.assignPos(0, 6, new Knight(false, 10));
+        f.assignPos(0, 8, new Knight(false, 10));
+        f.assignPos(1, 4, new Knight(false, 10));
+        f.assignPos(1, 5, new Knight(false, 10));
+        f.assignPos(0,1,new Archer(false,10));
 
         //Red
-        f.assignPos(11, 0, new Knight(true, 100));
+        f.assignPos(11, 0, new Knight(true, 20));
         f.assignPos(11, 2, new Knight(true, 10));
         f.assignPos(11, 4, new Knight(true, 10));
-        f.assignPos(11, 6, new Knight(true, 1));
-        f.assignPos(11, 8, new Knight(true, 1));
-        f.assignPos(10, 4, new Knight(true, 1));
-        f.assignPos(10, 5, new Knight(true, 1));
-        f.assignPos(11,1,new Archer(true,5));
+        f.assignPos(11, 6, new Knight(true, 10));
+        f.assignPos(11, 8, new Knight(true, 10));
+        f.assignPos(10, 4, new Knight(true, 10));
+        f.assignPos(10, 5, new Knight(true, 10));
+        f.assignPos(11,1,new Archer(true,10));
 
         updateMap();
     }
