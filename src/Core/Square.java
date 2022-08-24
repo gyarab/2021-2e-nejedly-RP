@@ -12,8 +12,9 @@ import Figures.Figure;
  * @author Vojta
  */
 public class Square {
+
     private Figure currentFigure;
-    
+
     private int xPos;
     private int yPos;
 
@@ -22,11 +23,11 @@ public class Square {
         this.yPos = yPos;
         this.currentFigure = currentFigure;
     }
-    
-    public boolean isEmpty(){
+
+    public boolean isEmpty() {
         return currentFigure == null;
     }
-    
+
     public void setCurrentFigure(Figure currentFigure) {
         this.currentFigure = currentFigure;
     }
@@ -34,6 +35,5 @@ public class Square {
     public Figure getCurrentFigure() {
         return currentFigure;
     }
-    
-    
+
 }

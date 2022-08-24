@@ -11,13 +11,15 @@ import javafx.scene.image.Image;
  *
  * @author Vojta
  */
-public class Archer extends Knight{
+public class Archer extends Knight {
+
     public Archer(boolean color, int count) {
         super(color, count);
-        if (color)
+        if (color) {
             super.img = new Image("resources/ArcherR.png");
-        else
+        } else {
             super.img = new Image("resources/ArcherB.png");
+        }
         super.maxHp = 100;
         super.armor = 10.0;
         super.moveDist = 3;
@@ -30,6 +32,5 @@ public class Archer extends Knight{
     public double getRangedDmg() {
         return rangedDmg;
     }
-    
-    
+
 }

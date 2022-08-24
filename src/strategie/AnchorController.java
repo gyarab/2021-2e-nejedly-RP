@@ -5,11 +5,10 @@
  */
 package strategie;
 
-
 /**
  * FXML Controller class
  *
  * @author Vojta
  */
-public class AnchorController{
+public class AnchorController {
 }

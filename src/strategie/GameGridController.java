@@ -10,7 +10,6 @@ import Figures.Archer;
 import Figures.Figure;
 import Figures.Knight;
 
-
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -31,6 +30,7 @@ import javafx.scene.text.Font;
  * @author Vojta
  */
 public class GameGridController implements Initializable {
+
     /**
      * logicke pole pro vypocty tahu provedem na grafickem poli.
      */
@@ -40,12 +40,10 @@ public class GameGridController implements Initializable {
 
     private boolean turnColor = false;
 
-
     private int moveCount = 0;
 
     /**
-     *  maxMoves urcuje pocet tahu za kolo,
-     *  nesmi byt mensi nez 1.
+     * maxMoves urcuje pocet tahu za kolo, nesmi byt mensi nez 1.
      */
     public int maxMoves = 2;
 
@@ -53,18 +51,15 @@ public class GameGridController implements Initializable {
     private ImageView[][] images;
     private Label[][] texts;
 
-    private boolean editable = false;
+    private boolean editing = false;
 
     private ProgressBar[][] progress;
-    /**
-     * Initializes the controller class.
-     */
     @FXML
     private Button backButton;
 
     @FXML
     private CheckBox editCheckBox;
-    
+
     @FXML
     private GridPane GameGrid;
 
@@ -76,60 +71,62 @@ public class GameGridController implements Initializable {
 
     @FXML
     void checkEditable(ActionEvent event) {
-        editable = editCheckBox.isSelected();
+        editing = editCheckBox.isSelected();
     }
 
     @FXML
     void mousePressed(MouseEvent event) {
-        if (event.getY() <= 30)
+        if (event.getY() <= 30) {
             return;
+        }
 
-        if (editable){
-            double curX = (event.getX()/1920)*12;
-            double curY = ((event.getY()-30)/1050)*10;
+        if (editing) {
+            double curX = (event.getX() / 1920) * 12;
+            double curY = ((event.getY() - 30) / 1050) * 10;
             int targetX = (int) curX;
             int targetY = (int) curY;
-            if (f.getFigure(targetX,targetY) == null){
-                f.assignPos(targetX,targetY,new Knight(turnColor,20));
+            if (f.getFigure(targetX, targetY) == null) {
+                f.assignPos(targetX, targetY, new Knight(turnColor, 20));
                 updateMap();
-            } else if(f.getFigure(targetX,targetY).getClass() == Knight.class){
-                f.deleteFig(targetX,targetY);
-                f.assignPos(targetX,targetY,new Archer(turnColor,20));
+            } else if (f.getFigure(targetX, targetY).getClass() == Knight.class) {
+                f.deleteFig(targetX, targetY);
+                f.assignPos(targetX, targetY, new Archer(turnColor, 20));
                 updateMap();
-            }else if(f.getFigure(targetX,targetY).getClass() == Archer.class)
-                f.deleteFig(targetX,targetY);
+            } else if (f.getFigure(targetX, targetY).getClass() == Archer.class) {
+                f.deleteFig(targetX, targetY);
+            }
             updateMap();
         } else if (moving) {
-            double curX = (event.getX()/1920)*12;
-            double curY = ((event.getY()-30)/1050)*10;
+            double curX = (event.getX() / 1920) * 12;
+            double curY = ((event.getY() - 30) / 1050) * 10;
             int targetX = (int) curX;
             int targetY = (int) curY;
 //            System.out.print(targetX);
 //            System.out.print(";");
 //            System.out.println(targetY);
 
-
             images[currentX][currentY].setOpacity(1.0);
-            if (f.getFigure(targetX,targetY) == null){
-                if (f.move(currentX, currentY, targetX, targetY))
+            if (f.getFigure(targetX, targetY) == null) {
+                if (f.move(currentX, currentY, targetX, targetY)) {
                     moveCount++;
+                }
             } else if (f.getFigure(currentX, currentY).isColor() == f.getFigure(targetX, targetY).isColor()) {
-                    if (f.move(currentX, currentY, targetX, targetY))
-                        moveCount++;
-                } else if (f.getFigure(currentX, currentY).getRangedDmg() > 0) {
-                    if (f.rangedAttack(currentX, currentY, targetX, targetY))
-                        moveCount++;
-                } else if (f.attack(currentX, currentY, targetX, targetY))
+                if (f.move(currentX, currentY, targetX, targetY)) {
                     moveCount++;
-
-
+                }
+            } else if (f.getFigure(currentX, currentY).getRangedDmg() > 0) {
+                if (f.rangedAttack(currentX, currentY, targetX, targetY)) {
+                    moveCount++;
+                }
+            } else if (f.attack(currentX, currentY, targetX, targetY)) {
+                moveCount++;
+            }
 
             moving = false;
             updateMap();
-        }
-        else {
-            double curX = (event.getX()/1920)*12;
-            double curY = ((event.getY()-30)/1050)*10;
+        } else {
+            double curX = (event.getX() / 1920) * 12;
+            double curY = ((event.getY() - 30) / 1050) * 10;
             currentX = (int) curX;
             currentY = (int) curY;
 //            System.out.print(currentX);
@@ -137,34 +134,26 @@ public class GameGridController implements Initializable {
 //            System.out.println(currentY);
 
             Figure fig = f.getFigure(currentX, currentY);
-            if (fig == null)
+            if (fig == null) {
                 return;
-            if (fig.isColor() != turnColor)
+            }
+            if (fig.isColor() != turnColor) {
                 return;
+            }
 
             images[currentX][currentY].setOpacity(0.5);
             moving = true;
         }
     }
-    
-    @FXML
-    void mouseReleased(MouseEvent event) {
 
-    }
-    
-    
-    @FXML
-    void mouseDragged(MouseEvent event) {
-
-    }
-    
     @FXML
     void backToMenu(ActionEvent event) {
         Strategie.setCurrentPane(0);
     }
-    
-    
 
+    /**
+     * Initializes the controller class.
+     */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         GameGrid.setGridLinesVisible(true);
@@ -173,7 +162,7 @@ public class GameGridController implements Initializable {
     }
 
     private void updateMap() {
-        if (moveCount == maxMoves){
+        if (moveCount == maxMoves) {
             turnColor = !turnColor;
             moveCount = 0;
         }
@@ -184,9 +173,11 @@ public class GameGridController implements Initializable {
             for (int j = 0; j < Field.HEIGHT; j++) {
                 Figure figure = f.getFigure(i, j);
                 if (figure != null) {
-                    if (figure.isColor())
+                    if (figure.isColor()) {
                         red++;
-                    else blue++;
+                    } else {
+                        blue++;
+                    }
                     images[i][j].setImage(figure.getImg());
                     texts[i][j].setText(String.valueOf(figure.getCount()));
                     texts[i][j].setVisible(true);
@@ -239,7 +230,7 @@ public class GameGridController implements Initializable {
         f.assignPos(0, 8, new Knight(false, 10));
         f.assignPos(1, 4, new Knight(false, 10));
         f.assignPos(1, 5, new Knight(false, 10));
-        f.assignPos(0,1,new Archer(false,10));
+        f.assignPos(0, 1, new Archer(false, 10));
 
         //Red
         f.assignPos(11, 0, new Knight(true, 20));
@@ -249,12 +240,12 @@ public class GameGridController implements Initializable {
         f.assignPos(11, 8, new Knight(true, 10));
         f.assignPos(10, 4, new Knight(true, 10));
         f.assignPos(10, 5, new Knight(true, 10));
-        f.assignPos(11,1,new Archer(true,10));
+        f.assignPos(11, 1, new Archer(true, 10));
 
         updateMap();
     }
-    
-    private void initializeBattlefield(){
+
+    private void initializeBattlefield() {
         images = new ImageView[Field.WIDTH][Field.HEIGHT];
         texts = new Label[Field.WIDTH][Field.HEIGHT];
         progress = new ProgressBar[Field.WIDTH][Field.HEIGHT];
@@ -267,9 +258,9 @@ public class GameGridController implements Initializable {
                 iv.setPreserveRatio(false);
                 Label l = new Label();
                 l.setAlignment(Pos.BOTTOM_LEFT);
-                l.setMinSize(0,0);
-                l.setPrefSize(160,105);
-                l.setMaxSize(160,105);
+                l.setMinSize(0, 0);
+                l.setPrefSize(160, 105);
+                l.setMaxSize(160, 105);
                 l.setVisible(false);
                 l.setFont(new Font(20));
                 ProgressBar pb = new ProgressBar();
@@ -281,7 +272,6 @@ public class GameGridController implements Initializable {
                 texts[i][j] = l;
                 GameGrid.add(iv, i, j + 1);
                 images[i][j] = iv;
-
 
             }
         }

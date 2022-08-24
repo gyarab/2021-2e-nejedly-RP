@@ -26,16 +26,14 @@ public class HelpController implements Initializable {
     void back(ActionEvent event) {
         Strategie.setCurrentPane(0);
     }
-    
-    
-    
+
     /**
      * Initializes the controller class.
-     * 
+     *
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        
-    }    
-    
+
+    }
+
 }

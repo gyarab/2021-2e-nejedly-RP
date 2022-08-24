@@ -11,13 +11,15 @@ import javafx.scene.image.Image;
  *
  * @author Vojta
  */
-public class Knight extends Figure{
+public class Knight extends Figure {
+
     public Knight(boolean color, int count) {
         super(color, count);
-        if (color)
+        if (color) {
             super.img = new Image("resources/KnightR.png");
-        else
+        } else {
             super.img = new Image("resources/KnightB.png");
+        }
         super.maxHp = 100.0;
         super.meleeDmg = 30.0;
         super.armor = 20.0;

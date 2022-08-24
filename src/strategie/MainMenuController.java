@@ -10,7 +10,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
 
-public class MainMenuController{
+public class MainMenuController {
 
     @FXML
     private ImageView BackGround;
@@ -23,15 +23,17 @@ public class MainMenuController{
 
     @FXML
     private Button playButton;
-    
+
     @FXML
     void stop(ActionEvent event) {
         System.exit(0);
     }
+
     @FXML
     void help(ActionEvent event) {
         Strategie.setCurrentPane(1);
     }
+
     @FXML
     void play(ActionEvent event) {
         Strategie.setCurrentPane(2);

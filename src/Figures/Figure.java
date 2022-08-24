@@ -12,6 +12,7 @@ import javafx.scene.image.Image;
  * @author Vojta
  */
 public class Figure {
+
     double rangedDmg;
 
     double maxHp;
@@ -25,7 +26,7 @@ public class Figure {
     Image img;
 
     /**
-     * 
+     *
      * @param color false -> modry, true-> cerveny
      * @param count pocet jednotek
      */
