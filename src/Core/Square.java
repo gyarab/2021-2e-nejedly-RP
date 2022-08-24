@@ -11,13 +11,13 @@ import Figures.Figure;
  *
  * @author Vojta
  */
-public class Squere {
+public class Square {
     private Figure currentFigure;
     
     private int xPos;
     private int yPos;
 
-    public Squere(int xPos, int yPos, Figure currentFigure) {
+    public Square(int xPos, int yPos, Figure currentFigure) {
         this.xPos = xPos;
         this.yPos = yPos;
         this.currentFigure = currentFigure;

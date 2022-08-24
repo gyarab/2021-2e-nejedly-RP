@@ -6,7 +6,6 @@
 package strategie;
 
 import Core.Field;
-import Core.Squere;
 import Figures.Archer;
 import Figures.Figure;
 import Figures.Knight;

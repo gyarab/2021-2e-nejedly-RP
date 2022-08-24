@@ -42,12 +42,12 @@
          <image>
             <Image url="resources/Background.png" />
          </image></ImageView>
-      <Button fx:id="backButton" alignment="CENTER" maxHeight="30.0" maxWidth="30.0" minHeight="30.0" mnemonicParsing="false" onAction="#backToMenu" prefWidth="30.0" GridPane.columnIndex="11" GridPane.halignment="RIGHT" GridPane.hgrow="NEVER" GridPane.vgrow="NEVER">
+      <Button fx:id="backButton" maxHeight="30.0" minHeight="30.0" mnemonicParsing="false" onAction="#backToMenu" GridPane.columnIndex="11" GridPane.halignment="RIGHT" GridPane.hgrow="NEVER" GridPane.vgrow="NEVER">
          <GridPane.margin>
             <Insets />
          </GridPane.margin>
          <graphic>
-            <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true">
+            <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="resources/Back.png" />
                </image>

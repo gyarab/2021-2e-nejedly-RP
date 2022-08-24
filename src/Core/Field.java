@@ -14,13 +14,13 @@ import Figures.Figure;
 public class Field{
     public static final int WIDTH = 12;
     public static final int HEIGHT = 10;
-    private Squere[][] field;
+    private Square[][] field;
 
     public Field() {
-        this.field = new Squere[WIDTH][HEIGHT];
+        this.field = new Square[WIDTH][HEIGHT];
         for (int i = 0; i < WIDTH; i++) {
             for (int j = 0; j < HEIGHT; j++) {
-                this.field[i][j] = new Squere(i, j, null);
+                this.field[i][j] = new Square(i, j, null);
             }
         }
     }
