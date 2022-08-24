@@ -1,3 +1,3 @@
 # 2021-2e-nejedly-RP
 
-Rocnikovy projekt
+Rocnikovy projekt 2021/22
